@@ -59,7 +59,7 @@
             </div>
             <div class="col-xs-12 col-md-3 xs-display-none">
               <ul class="top-social-icon">
-                <li><a href="https://www.twitter.com/mosesfamot" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="https://www.instagram.com/mosesfamot" target="_blank"><i class="fab fa-instagram"></i></a></li>
                 <!-- <li><a href="https://twitter.com/mosesfamot?t=XDA6sysIaYs7AqKdu49F_Q&s=09" target="_blank"><i class="fab fa-twitter"></i></a></li> -->
                 <li><a href="https://wa.me/+2347031552144" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
                 <li><a href="https://www.linkedin.com/in/moses-ojo-57174816b" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
@@ -294,19 +294,19 @@
               <input type="hidden" name="form-type" value="contact">
               <div class="row">
                 <div class="col-md-6">
-                  <input type="text" name="name" placeholder="Your Name:" data-constraints="@LettersOnly @NotEmpty">
+                  <input type="text" name="name" required placeholder="Your Name:" class="username" data-constraints="@LettersOnly @NotEmpty">
                 </div>
                 <div class="col-md-6">
-                  <input type="text" name="email" placeholder="Your Email:" data-constraints="@Email @NotEmpty">
+                  <input type="text" name="email" required placeholder="Your Email:" class="email" data-constraints="@Email @NotEmpty">
                 </div>
                 <div class="col-md-12">
-                  <input type="text" name="phone" placeholder="Telephone number:" data-constraints="@Phone">
+                  <input type="text" name="phone" required placeholder="Telephone number:" class="number" data-constraints="@Phone">
                 </div>
                 <div class="col-md-12">
-                  <textarea name="message" rows="5" placeholder="Message:" data-constraints="@NotEmpty"></textarea>
+                  <textarea name="message" rows="5" required placeholder="Message:" class="message" data-constraints="@NotEmpty"></textarea>
                 </div>
                 <div class="mfControls col-md-12">
-                  <button type="submit" class="butn">Submit</button>
+                  <button type="submit" class="butn submit">Submit</button>
                 </div>
               </div>
             </form>
@@ -339,7 +339,7 @@
           <div class="col-12 text-center">
             <ul class="social-icon-style5 no-margin">
               <li>
-                <a href="https://www.twitter.com/mosesfamot" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/mosesfamot" target="_blank"><i class="fab fa-instagram"></i></a>
               </li>
               <!-- <li>
                 <a href="https://twitter.com/mosesfamot?t=XDA6sysIaYs7AqKdu49F_Q&s=09" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -370,6 +370,79 @@
 
   </div>
   <!-- end main-wrapper section -->
+
+  <!-- FORM START -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+  (function() {
+  emailjs.init("PhrtmOwoXJ8N9-5Lh");
+  })();
+  </script>
+
+  <!-- SWEET ALERT -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script type="text/javascript">
+
+    function validate() {
+      let username = document.querySelector(".username")
+      let email = document.querySelector(".email")
+      let number = document.querySelector(".number")
+      let message = document.querySelector(".message")
+      let submit = document.querySelector(".submit");
+
+      submit.addEventListener("click", (e) => {
+        e.preventDefault()
+
+        if (username.value == "" || message.value == "") {
+          inputempty();
+        } else {
+          sendmail(username.value, email.value, number.value, message.value)
+          success();
+          console.log("Email Sent!")
+        }
+      })
+    }
+    validate()
+
+    function sendmail(username, email, number, message) {
+      emailjs.send("service_s0aonad","template_wbujwxm",{
+        to_name: "Moses",
+        from_name: username,
+        message: message
+  });
+    }
+
+
+
+    function success() {
+      swal({
+        title: "Form Submitted!",
+        text: "We will get back to you soon!",
+        icon: "success",
+        button: "Close!",
+      });
+    }
+
+    function error() {
+      swal({
+        title: "Form Not Submitted!",
+        text: "Something went wrong!",
+        icon: "error",
+        button: "Try Again!",
+      });
+    }
+
+    function inputempty() {
+      swal({
+        title: "Opps...!",
+        text: "Input fields are required!",
+        icon: "error",
+        button: "Try Again!",
+      });
+    }
+  </script>
+  <!-- FORM END -->
 
   <!-- start scroll to top -->
   <a href="javascript:void(0)" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
