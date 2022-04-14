@@ -405,13 +405,13 @@
     }
     validate()
 
-    function sendmail(username, email, number, message) {
+    function sendmail(username, message, email, number) {
       emailjs.send("service_s0aonad","template_wbujwxm",{
         to_name: "Moses",
         from_name: username,
-        email: email,
         message: message,
-        number: number
+        email: email,
+        number: number,
   });
     }
 
